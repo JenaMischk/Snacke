@@ -27,7 +27,7 @@ export default function Home({ navigation }) {
           <Text style={stylesPLS.textStyle}>
             Bem vindo ao nosso novo desafio
           </Text>
-
+          <View style={stylesPLS.fakeSpacer}/>
           <Text style={stylesPLS.bigTextStyle}>
             Peddy Paper
           </Text>

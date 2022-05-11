@@ -24,14 +24,14 @@
     "react-native-reanimated": "~2.3.1",
     "@react-navigation/drawer": "*",
     "@react-navigation/native": "*",
+    "react-native-vector-icons": "*",
     "@expo-google-fonts/calistoga": "*",
     "react-native-gesture-handler": "~2.1.0",
     "@expo-google-fonts/montserrat": "*",
     "@expo-google-fonts/dotgothic16": "*",
     "@react-navigation/native-stack": "*",
     "react-native-safe-area-context": "3.3.2",
-    "react-native-countdown-component": "*",
-    "react-native-vector-icons": "9.1.0"
+    "react-native-countdown-component": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

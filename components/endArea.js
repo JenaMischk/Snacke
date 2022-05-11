@@ -31,13 +31,9 @@ export default function EndArea({ route, navigation }) {
             onFinish={() => {navigation.replace('ResultsArea')} }
             onPress={() => {navigation.replace('ResultsArea')} }
             size={20}
-            //digitStyle={{backgroundColor: '#FFF'}}
-            //digitTxtStyle={{color: '#1CC625'}}
             timeToShow={['M', 'S']}
             timeLabels={{m: 'm', s: 's'}}
             timeLabelStyle={{color: 'white', fontWeight: 'bold'}}
-            //showSeparator
-            //separatorStyle={{color: 'white'}}
           />
 
 

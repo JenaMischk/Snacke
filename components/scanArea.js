@@ -18,7 +18,7 @@ export default function ScanArea({ route, navigation }) {
         <ScrollView style={stylesPLS.scrollView}>
 
           <Text style={stylesPLS.textStyle}>
-          Encontra o QR Code escondido nesta zona
+          Encontra o Código QR escondido nesta zona
           </Text>
 
           {/*pedir permissao automatica?*/}

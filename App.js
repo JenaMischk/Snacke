@@ -15,7 +15,6 @@ import ScanArea from './components/scanArea.js';
 import ChallengeArea from './components/challengeArea.js';
 import EndArea from './components/endArea.js';
 import ResultsArea from './components/resultsArea.js';
-import SupportArea from './components/support.js';
 
 import {stylesPLS} from './components/styles.js'
 
@@ -45,14 +44,14 @@ function OptionsButton() {
 
 function OptionsScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Ver pontuação em tempo real" />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'black'}}>
+      <Button  color = "#ff9201" onPress={() => navigation.goBack()} title="Ver pontuação em tempo real" />
       <Text> </Text>
-      <Button onPress={() => navigation.goBack()} title="Alternar modo de dia/noite" />
+      <Button color = "#ff9201" onPress={() => navigation.goBack()} title="Alternar modo de dia/noite" />
       <Text> </Text>
-      <Button onPress={() => navigation.goBack()} title="Mudar linguagem" />
+      <Button color = "#ff9201" onPress={() => navigation.goBack()} title="Mudar linguagem" />
       <Text> </Text>
-      <Button onPress={() => { Linking.openURL('https://wa.me/933090942')}} title="Contactar suporte" />
+      <Button color = "#ff9201" onPress={() => { Linking.openURL('https://wa.me/933090942')}} title="Contactar suporte" />
     </View>
   );
 }
@@ -116,10 +115,6 @@ export default function App() {
           <Stack.Screen
             name="ResultsArea"
             component={ResultsArea}
-          />
-          <Stack.Screen
-            name="SupportArea"
-            component={SupportArea}
           />
         </Stack.Group>
 

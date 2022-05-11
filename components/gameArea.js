@@ -82,6 +82,8 @@ export default function GameArea({ route, navigation }) {
             />
           </View>
 
+          <View style={stylesPLS.fakeSpacer}/>
+
           <Text style={stylesPLS.mediumTextStyle}>
             {challengeList[currentChallenge].destinationName}
           </Text>
