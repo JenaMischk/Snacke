@@ -1,24 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AppContext from './appContext';
 import {  Text, View, StyleSheet, Image, Modal, Alert, Pressable, StatusBar,
           TextInput, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { Card } from 'react-native-paper';
 
-import {stylesPLS} from './styles.js'
-
 export default function Home({ navigation }) {
+
+  const globals = useContext(AppContext);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const stylesPLS = globals.darkTheme ? globals.styles.darkStyle : globals.styles.lightStyle;
+
   return (
 
 
     <SafeAreaView style={stylesPLS.container}>
-      <StatusBar barStyle="light-content" backgroundColor="black" />
+      <StatusBar barStyle="light-content" backgroundColor={globals.darkTheme ? 'black' : 'orange'} />
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
         <ScrollView style={stylesPLS.scrollView}>
+
+          <Text style={stylesPLS.textStyle}>
+            {globals.balls}
+          </Text>
+          <Text style={stylesPLS.textStyle}>
+            {globals.weeds}
+          </Text>
 
           <View style={stylesPLS.fakeSpacer}/>
           <View style={stylesPLS.fakeSpacer}/>

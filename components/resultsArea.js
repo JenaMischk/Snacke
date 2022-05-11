@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AppContext from './appContext';
 import {  Text, View, StyleSheet, Image, Modal, Alert, Pressable, Dimensions,
           TextInput, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView,
           Button, Linking, TouchableOpacity } from 'react-native';
@@ -10,26 +11,29 @@ import {stylesPLS} from './styles.js'
 
 export default function ResultsArea({ route, navigation }) {
 
-const equipas = [
-  {
-    id: "1",
-    name: "Batatum",
-    tempo: '42m',
-    pontos: 650
-  },
-  {
-    id: "2",
-    name: "Ratos do Campo",
-    tempo: '49m',
-    pontos: 500
-  },
-  {
-    id: "3",
-    name: "Pastéis de Belém",
-    tempo: '55m',
-    pontos: 350
-  }
-];
+  const globals = useContext(AppContext);
+  const stylesPLS = globals.darkTheme ? globals.styles.darkStyle : globals.styles.lightStyle;
+
+  const equipas = [
+    {
+      id: "1",
+      name: "Batatum",
+      tempo: '42m',
+      pontos: 650
+    },
+    {
+      id: "2",
+      name: "Ratos do Campo",
+      tempo: '49m',
+      pontos: 500
+    },
+    {
+      id: "3",
+      name: "Pastéis de Belém",
+      tempo: '55m',
+      pontos: 350
+    }
+  ];
 
   return (
 
@@ -60,7 +64,7 @@ const equipas = [
         <View style={stylesPLS.fakeSpacer}/>
 
         <View style={{flex: 1, alignItems: 'center'}}>
-          <Text style={stylesPLS.narrowTextStyle}>
+          <Text style={stylesPLS.textStyle}>
             Descobre as últimas novidades no nosso website e ganha um desconto de 10% em qualquer Escape Room
           </Text>
           <TouchableOpacity onPress={ ()=>{ Linking.openURL('https://missiontoescape.com/')}}>

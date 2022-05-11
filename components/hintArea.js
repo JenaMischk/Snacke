@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AppContext from './appContext';
 import {  Text, View, StyleSheet, Image, Modal, Alert, Pressable, Dimensions,
           TextInput, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
@@ -7,9 +8,10 @@ import { Card } from 'react-native-paper';
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 
-import {stylesPLS} from './styles.js'
-
 export default function HintArea({ route, navigation }) {
+
+  const globals = useContext(AppContext);
+  const stylesPLS = globals.darkTheme ? globals.styles.darkStyle : globals.styles.lightStyle;
 
   const { destinationCoords, destinationName } = route.params;
 

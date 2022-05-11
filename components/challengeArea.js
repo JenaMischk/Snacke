@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AppContext from './appContext';
 import {  Text, View, StyleSheet, Image, Modal, Alert, Pressable, Dimensions,
           TextInput, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import CountDown from 'react-native-countdown-component';
 import { Card } from 'react-native-paper';
 
-import {stylesPLS} from './styles.js'
-
 export default function ChallengeArea({ route, navigation }) {
 
-const [awnser, setAwnser] = useState('');
-const [nomeBotao, setBotao] = useState('Confirmar');
+  const globals = useContext(AppContext);
+  const stylesPLS = globals.darkTheme ? globals.styles.darkStyle : globals.styles.lightStyle;
+  
+  const [awnser, setAwnser] = useState('');
+  const [nomeBotao, setBotao] = useState('Confirmar');
 
   return (
 

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import AppContext from './components/appContext';
 import { KeyboardAvoidingView, Platform, Image, Text, View,
   Button, TouchableOpacity, Linking } from 'react-native';
 import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
@@ -16,7 +17,8 @@ import ChallengeArea from './components/challengeArea.js';
 import EndArea from './components/endArea.js';
 import ResultsArea from './components/resultsArea.js';
 
-import {stylesPLS} from './components/styles.js'
+import {lightStyle} from './components/styles.js'
+import {darkStyle} from './components/styles.js'
 
 function LogoTitle() {
   return (
@@ -35,7 +37,7 @@ function OptionsButton() {
   if(route.name != 'Options'){
     return (
       <TouchableOpacity onPress={() => navigation.navigate('Options')} title="Opções">
-        <Icon name="bars" size={30} color="white" />
+        <Icon name="gear" size={30} color="white" />
       </TouchableOpacity>
     )
   }
@@ -43,20 +45,36 @@ function OptionsButton() {
 }
 
 function OptionsScreen({ navigation }) {
+  const globals = useContext(AppContext);
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'black'}}>
-      <Button  color = "#ff9201" onPress={() => navigation.goBack()} title="Ver pontuação em tempo real" />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: globals.darkTheme? 'black' : '#ff9201'}}>
+      <Button  color = {globals.darkTheme? '#ff9201' : 'black'} onPress={() => navigation.goBack()} title="Ver pontuação em tempo real" />
       <Text> </Text>
-      <Button color = "#ff9201" onPress={() => navigation.goBack()} title="Alternar modo de dia/noite" />
+      <Button color = {globals.darkTheme? '#ff9201' : 'black'} onPress={() => globals.setdarkTheme(!globals.darkTheme)} title="Alternar modo de dia/noite" />
       <Text> </Text>
-      <Button color = "#ff9201" onPress={() => navigation.goBack()} title="Mudar linguagem" />
+      <Button color = {globals.darkTheme? '#ff9201' : 'black'} onPress={() => navigation.goBack()} title="Mudar linguagem" />
       <Text> </Text>
-      <Button color = "#ff9201" onPress={() => { Linking.openURL('https://wa.me/933090942')}} title="Contactar suporte" />
+      <Button color = {globals.darkTheme? '#ff9201' : 'black'} onPress={() => { Linking.openURL('https://wa.me/933090942')}} title="Contactar suporte" />
     </View>
   );
 }
 
 export default function App() {
+
+  const [currentChallenge, setcurrentChallenge] = useState(0);
+  const [darkTheme, setdarkTheme] = useState(true);
+  const styles = {
+    lightStyle: lightStyle,
+    darkStyle: darkStyle
+  }
+
+  const userSettings = {
+    currentChallenge: currentChallenge,
+    darkTheme: darkTheme,
+    setcurrentChallenge,
+    setdarkTheme,
+    styles
+  };
 
   let [fontsLoaded] = useFonts({
     Montserrat_400Regular,
@@ -72,60 +90,64 @@ export default function App() {
  
   return (
 
-    <NavigationContainer>
-     <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: 'black',
-          },
-          headerTintColor: 'white',
-          headerTitle: () => <LogoTitle/>,
-          headerRight: () => <OptionsButton/>
-        }}
-      >
-        <Stack.Group>
-          <Stack.Screen
-            name="Home"
-            component={Home}
-          />
-          <Stack.Screen
-            name="WaitingArea"
-            component={WaitingArea}
-          />
-          <Stack.Screen
-            name="GameArea"
-            component={GameArea}
-          />
-          <Stack.Screen
-            name="HintArea"
-            component={HintArea}
-          />
-          <Stack.Screen
-            name="ScanArea"
-            component={ScanArea}
-          />
-          <Stack.Screen
-            name="ChallengeArea"
-            component={ChallengeArea}
-          />
-          <Stack.Screen
-            name="EndArea"
-            component={EndArea}
-          />
-          <Stack.Screen
-            name="ResultsArea"
-            component={ResultsArea}
-          />
-        </Stack.Group>
+    <AppContext.Provider value={userSettings}>
 
-        <Stack.Group>
-          <Stack.Screen
-            name="Options"
-            component={OptionsScreen}
-          />
-        </Stack.Group>
+      <NavigationContainer>
+      <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: darkTheme? 'black' : '#ff9201',
+            },
+            headerTintColor: 'white',
+            headerTitle: () => <LogoTitle/>,
+            headerRight: () => <OptionsButton/>
+          }}
+        >
+          <Stack.Group>
+            <Stack.Screen
+              name="Home"
+              component={Home}
+            />
+            <Stack.Screen
+              name="WaitingArea"
+              component={WaitingArea}
+            />
+            <Stack.Screen
+              name="GameArea"
+              component={GameArea}
+            />
+            <Stack.Screen
+              name="HintArea"
+              component={HintArea}
+            />
+            <Stack.Screen
+              name="ScanArea"
+              component={ScanArea}
+            />
+            <Stack.Screen
+              name="ChallengeArea"
+              component={ChallengeArea}
+            />
+            <Stack.Screen
+              name="EndArea"
+              component={EndArea}
+            />
+            <Stack.Screen
+              name="ResultsArea"
+              component={ResultsArea}
+            />
+          </Stack.Group>
 
-      </Stack.Navigator>
-    </NavigationContainer> 
+          <Stack.Group>
+            <Stack.Screen
+              name="Options"
+              component={OptionsScreen}
+            />
+          </Stack.Group>
+
+        </Stack.Navigator>
+      </NavigationContainer>
+
+    </AppContext.Provider> 
   );
 }

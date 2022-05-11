@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AppContext from './appContext';
 import {  Text, View, StyleSheet, Image, Modal, Alert, Pressable,
           TextInput, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
@@ -9,6 +10,9 @@ import {stylesPLS} from './styles.js'
 import { Card } from 'react-native-paper';
 
 export default function WaitingArea({ navigation }) {
+
+  const globals = useContext(AppContext);
+  const stylesPLS = globals.darkTheme ? globals.styles.darkStyle : globals.styles.lightStyle;
 
   return (
 
