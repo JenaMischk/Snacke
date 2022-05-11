@@ -1,9 +1,10 @@
 import React from 'react';
-import { KeyboardAvoidingView, Platform, Image, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, Image, Text, View, Button } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
-import { useFonts, Calistoga_400Regular } from '@expo-google-fonts/calistoga';
+import { useFonts, Montserrat_400Regular, Montserrat_700Bold, Montserrat_800ExtraBold } from '@expo-google-fonts/montserrat';
 
 import Home from './components/home.js';
 import WaitingArea from './components/waitingArea.js';
@@ -13,11 +14,11 @@ import ScanArea from './components/scanArea.js';
 import ChallengeArea from './components/challengeArea.js';
 import EndArea from './components/endArea.js';
 import ResultsArea from './components/resultsArea.js';
-
+import SupportArea from './components/support.js';
 
 function LogoTitle() {
   return (
-    <View /*style={{flex: 1, alignItems: 'center'}}*/>
+    <View>
       <Image
         style={{ width: 100, height: 50, marginTop: 10 }}
         source={require('./assets/mte-logo.png')}
@@ -29,7 +30,9 @@ function LogoTitle() {
 export default function App() {
 
   let [fontsLoaded] = useFonts({
-    Calistoga_400Regular,
+    Montserrat_400Regular,
+    Montserrat_700Bold,
+    Montserrat_800ExtraBold
   });
 
   if (!fontsLoaded) {
@@ -37,19 +40,21 @@ export default function App() {
   }
 
   const Stack = createNativeStackNavigator();
+  const Drawer = createDrawerNavigator();
  
   return (
 
     <NavigationContainer>
-      <Stack.Navigator
+     <Stack.Navigator
         screenOptions={{
           headerStyle: {
             backgroundColor: 'black',
           },
           headerTintColor: 'white',
-          headerTitle: (props) => <LogoTitle {...props}/> 
+          headerTitle: (props) => <LogoTitle {...props}/>,
         }}
       >
+
         <Stack.Screen
           name="Home"
           component={Home}
@@ -82,9 +87,12 @@ export default function App() {
           name="ResultsArea"
           component={ResultsArea}
         />
+         <Stack.Screen
+          name="SupportArea"
+          component={SupportArea}
+        />
+
       </Stack.Navigator>
-    </NavigationContainer>
-    
-    
+    </NavigationContainer> 
   );
 }

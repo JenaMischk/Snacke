@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import {  Text, View, StyleSheet, Image, Modal, Alert, Pressable,
           TextInput, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
-
-// You can import from local files
-//import AssetExample from './components/AssetExample';
-
-// or any pure javascript modules available in npm
 import { Card } from 'react-native-paper';
+
+import {stylesPLS} from './styles.js'
 
 export default function Home({ navigation }) {
 
@@ -18,44 +15,44 @@ export default function Home({ navigation }) {
   return (
 
 
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={stylesPLS.container}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
-        <ScrollView style={styles.scrollView}>
+        <ScrollView style={stylesPLS.scrollView}>
 
-          <View style={styles.fakeSpacer}/>
-          <View style={styles.fakeSpacer}/>
-          <View style={styles.fakeSpacer}/>
+          <View style={stylesPLS.fakeSpacer}/>
+          <View style={stylesPLS.fakeSpacer}/>
+          <View style={stylesPLS.fakeSpacer}/>
 
-          <Text style={styles.textStyle}>
+          <Text style={stylesPLS.textStyle}>
             Bem vindo ao nosso novo desafio
           </Text>
 
-          <Text style={styles.bigTextStyle}>
+          <Text style={stylesPLS.bigTextStyle}>
             Peddy Paper
           </Text>
 
-          <View style={styles.fakeSpacer}/>
+          <View style={stylesPLS.fakeSpacer}/>
 
-          <View style={styles.loginDiv}>
+          <View style={stylesPLS.loginDiv}>
             <TextInput
               value={username}
               onChangeText={(res) => setUsername(res)}
               placeholder={'Utilizador'}
-              style={styles.input}
+              style={stylesPLS.input}
             />
             <TextInput
               value={password}
               onChangeText={(res) => setPassword(res)}
               placeholder={'Password'}
               secureTextEntry={true}
-              style={styles.input}
+              style={stylesPLS.input}
             />
           </View>
 
           <Pressable
-            style={styles.button}
+            style={stylesPLS.button}
             onPress={() => navigation.replace('WaitingArea')}>
-            <Text style={styles.buttonTextStyle}>
+            <Text style={stylesPLS.buttonTextStyle}>
               Login
             </Text>
           </Pressable>
@@ -68,14 +65,14 @@ export default function Home({ navigation }) {
               setModalVisible(!modalVisible);
             }}
           >
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>
+            <View style={stylesPLS.modalView}>
+              <Text style={stylesPLS.modalText}>
                 Bem vindo à demonstração de frontend do software para Peddy Paper da Mission To Escape
               </Text>
               <Pressable
-                style={styles.modalButton}
+                style={stylesPLS.modalButton}
                 onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={styles.buttonTextStyle}>
+                <Text style={stylesPLS.buttonTextStyle}>
                   Fechar
                 </Text>
               </Pressable>
@@ -87,88 +84,3 @@ export default function Home({ navigation }) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    //alignItems: 'center',
-    //height: '100%',
-    paddingTop: Constants.statusBarHeight ? Constants.statusBarHeight : 10,
-    backgroundColor: 'black',
-    //padding: 8,
-  },
-  fakeSpacer:{
-    marginTop: '10%',
-  },
-  loginDiv:{
-    marginTop: '20%',
-    marginBottom: '2%',
-    marginHorizontal: '5%',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  mediumTextStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 18,
-  },
-  bigTextStyle: {
-    fontFamily: 'Calistoga_400Regular',
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 28,
-  },
-  modalView: {
-    marginTop: '40%',
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    marginHorizontal: '30%',
-    padding: 10,
-    elevation: 2,
-    backgroundColor: 'gold',
-  },
-  modalButton: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    backgroundColor: 'gold',
-  },
-  buttonTextStyle: {
-    color: 'black',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  input: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: 'white',
-    marginBottom: 10,
-    backgroundColor: 'white'
-  },
-  scrollView: {
-    //backgroundColor: 'pink',
-    //marginHorizontal: 20,
-  },
-});
