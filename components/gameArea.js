@@ -6,10 +6,9 @@ import CountDown from 'react-native-countdown-component';
 import { Card } from 'react-native-paper';
 
 
-export default function GameArea({ navigation }) {
+export default function GameArea({ route, navigation }) {
 
   const [currentChallenge, setCurrentChallenge] = useState(0);
-
   const challengeList = [
     {
       destinationName: 'Torre de Belém',
@@ -18,7 +17,8 @@ export default function GameArea({ navigation }) {
         lng: -9.216052404054627
       },
       destinationImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Torre_Bel%C3%A9m_April_2009-4a.jpg/1200px-Torre_Bel%C3%A9m_April_2009-4a.jpg',
-      password: 'oihvn98e9092nc24987'
+      password: 'oihvn98e9092nc24987',
+      hasChallenge: true
     },
     {
       destinationName: 'Padrão dos Descobrimentos',
@@ -27,7 +27,8 @@ export default function GameArea({ navigation }) {
         lng: -9.20566858686739
       },
       destinationImage: 'https://lisbonlisboaportugal.com/images/400pxbelem/padrao-descobrimentos-lisbon.jpg',
-      password: 'oihvn98e9092nc24987'
+      password: 'oihvn98e9092nc24987',
+      hasChallenge: false
     },
     {
       destinationName: 'Castelo de S. Jorge',
@@ -36,9 +37,24 @@ export default function GameArea({ navigation }) {
         lng: -9.133476202207603
       },
       destinationImage: 'https://cms.infoportugal.info/media/fotos/final/Lisboa/LSB3282.jpg',
-      password: 'oihvn98e9092nc24987'
+      password: 'oihvn98e9092nc24987',
+      hasChallenge: false
     },
   ];
+
+  React.useEffect(() => {
+    if (route.params?.success == true) {
+      if(currentChallenge != challengeList.length - 1) {
+          setCurrentChallenge(currentChallenge + 1)
+      } else {
+
+                navigation.replace('EndArea');
+
+              }
+          
+      route.params.success = false;
+    }
+  }, [route.params?.success]);
 
 
   return (
@@ -72,25 +88,15 @@ export default function GameArea({ navigation }) {
           <View style={styles.fakeSpacer}/>
           <View style={styles.fakeSpacer}/>
 
-          <Pressable
-            style={styles.button}
-            //onPress={() => navigation.navigate('WaitingArea')}
-            onPress={() => {
-              if(currentChallenge != challengeList.length - 1) {
-                setCurrentChallenge(currentChallenge + 1)
-              }
-            }}>
-            <Text style={styles.buttonTextStyle}>
-              Avançar
-            </Text>
-          </Pressable>
-
           <Text> </Text>
 
           <Pressable
             style={styles.button}
-            onPress={() => navigation.navigate('ScanArea')}
-            >
+            onPress={() => navigation.navigate('ScanArea', {
+              hasChallenge: challengeList[currentChallenge].hasChallenge,
+              
+            })
+            }>
             <Text style={styles.buttonTextStyle}>
               Confirmar chegada
             </Text>

@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
-import {  Text, View, StyleSheet, Image, Modal, Alert, Pressable, Dimensions, TouchableOpacity,
+import {  Text, View, StyleSheet, Image, Modal, Alert, Pressable, Dimensions,
           TextInput, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import CountDown from 'react-native-countdown-component';
 import { Card } from 'react-native-paper';
 
 
-export default function ScanArea({ route, navigation }) {
+export default function ResultsArea({ route, navigation }) {
 
-  const { hasChallenge } = route.params;
+const equipas = [
+  {
+    id: "1",
+    name: "Batatum",
+  },
+  {
+    id: "2",
+    name: "Ratos do Campo",
+  },
+  {
+    id: "3",
+    name: "Pastéis de Belém",
+  }
+];
 
   return (
 
@@ -16,45 +29,23 @@ export default function ScanArea({ route, navigation }) {
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
         <ScrollView style={styles.scrollView}>
 
-          <Text style={styles.textStyle}>
-          Encontra o QR Code escondido nesta zona
-          </Text>
+         <Text style={styles.bigTextStyle}>
+          Classificação Final
+         </Text>
 
-          {/*pedir permissao automatica?*/}
+       <View style={styles.fakeSpacer}/>
+       <View style={styles.fakeSpacer}/>
 
-          <View>
-          {/*em vez de image ir buscar imagem da camara em tempo real*/}
-           <Image
-             style={{ width: Dimensions.get('window').width * 0.6, height: Dimensions.get('window').height * 0.7,              marginTop: 10, marginLeft: Dimensions.get('window').width * 0.2, resizeMode: "contain"}}
-            source={require('./../assets/examplePic.jpg')}
-           />
-          </View>
-
-          {/*se pass do codigo == backend avancar logo
-          importar qual e o estado para depois avancar para o seguinte*/}
-          
-           <Pressable
-            style={styles.button}
-             onPress={() => {
-
-               if (hasChallenge == true) {
-
-              navigation.replace('ChallengeArea')
-
-              } else {
-
-                navigation.navigate({
-                 name: 'GameArea',
-                 params: { success: true },
-                 merge: true,
-               });
-              }}
-             }>
-            <Text style={styles.buttonTextStyle}>
-              Avançar
-            </Text>
-          </Pressable>
-
+        <View>
+         {equipas.map((equipa) => {
+           return (
+           <View>
+            <Text style={styles.textStyle}>{equipa.id}: {equipa.name}</Text>
+           </View>
+           );
+         })}
+        </View>
+    
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>

@@ -2,13 +2,18 @@ import React from 'react';
 import { KeyboardAvoidingView, Platform, Image, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-//import * as Realm from "realm-web";
+import AppLoading from 'expo-app-loading';
+import { useFonts, Calistoga_400Regular } from '@expo-google-fonts/calistoga';
 
 import Home from './components/home.js';
 import WaitingArea from './components/waitingArea.js';
 import GameArea from './components/gameArea.js';
 import HintArea from './components/hintArea.js';
 import ScanArea from './components/scanArea.js';
+import ChallengeArea from './components/challengeArea.js';
+import EndArea from './components/endArea.js';
+import ResultsArea from './components/resultsArea.js';
+
 
 function LogoTitle() {
   return (
@@ -23,12 +28,15 @@ function LogoTitle() {
 
 export default function App() {
 
-  const Stack = createNativeStackNavigator();
+  let [fontsLoaded] = useFonts({
+    Calistoga_400Regular,
+  });
 
-  /*const app = new Realm.App({ id: 'mte-peddypaper-mkkrj' });
-  const credentials = Realm.Credentials.anonymous();
-  const user = app.logIn(credentials);
-  console.log(app.currentUser, user);*/
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
+  const Stack = createNativeStackNavigator();
  
   return (
 
@@ -61,6 +69,18 @@ export default function App() {
         <Stack.Screen
           name="ScanArea"
           component={ScanArea}
+        />
+        <Stack.Screen
+          name="ChallengeArea"
+          component={ChallengeArea}
+        />
+         <Stack.Screen
+          name="EndArea"
+          component={EndArea}
+        />
+         <Stack.Screen
+          name="ResultsArea"
+          component={ResultsArea}
         />
       </Stack.Navigator>
     </NavigationContainer>

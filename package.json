@@ -16,6 +16,7 @@
     "react-native-web": "0.17.1",
     "realm-web": "*",
     "expo-constants": "~13.0.2",
+    "react-native-maps": "0.29.4",
     "@expo/vector-icons": "^12.0.0",
     "react-native-paper": "4.9.2",
     "react-native-screens": "~3.10.1",
@@ -23,7 +24,9 @@
     "@react-navigation/native-stack": "*",
     "react-native-safe-area-context": "3.3.2",
     "react-native-countdown-component": "*",
-    "react-native-maps": "0.29.4"
+    "expo-app-loading": "~1.3.0",
+    "@expo-google-fonts/dotgothic16": "*",
+    "@expo-google-fonts/calistoga": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

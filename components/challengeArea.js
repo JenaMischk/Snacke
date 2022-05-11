@@ -1,86 +1,62 @@
 import React, { useState } from 'react';
-import {  Text, View, StyleSheet, Image, Modal, Alert, Pressable,
+import {  Text, View, StyleSheet, Image, Modal, Alert, Pressable, Dimensions,
           TextInput, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
-
-// You can import from local files
-//import AssetExample from './components/AssetExample';
-
-// or any pure javascript modules available in npm
+import CountDown from 'react-native-countdown-component';
 import { Card } from 'react-native-paper';
 
-export default function Home({ navigation }) {
 
-  const [modalVisible, setModalVisible] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+export default function ChallengeArea({ route, navigation }) {
+
+const [awnser, setAwnser] = useState('');
+const [nomeBotao, setBotao] = useState('Confirmar');
 
   return (
-
 
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
         <ScrollView style={styles.scrollView}>
 
-          <View style={styles.fakeSpacer}/>
-          <View style={styles.fakeSpacer}/>
-          <View style={styles.fakeSpacer}/>
+         <Text style={styles.bigTextStyle}>
+            Desafio!
+          </Text>
+          
+        <View style={styles.fakeSpacer}/>
 
           <Text style={styles.textStyle}>
-            Bem vindo ao nosso novo desafio
+              Qual é a terceira palavra na inscrição presente na placa de informação junto ao QR Code?
           </Text>
-
-          <Text style={styles.bigTextStyle}>
-            Peddy Paper
-          </Text>
-
-          <View style={styles.fakeSpacer}/>
 
           <View style={styles.loginDiv}>
             <TextInput
-              value={username}
-              onChangeText={(res) => setUsername(res)}
-              placeholder={'Utilizador'}
-              style={styles.input}
-            />
-            <TextInput
-              value={password}
-              onChangeText={(res) => setPassword(res)}
-              placeholder={'Password'}
-              secureTextEntry={true}
+              value={awnser}
+              onChangeText={(res) => setAwnser(res)}
+              placeholder={'Resposta'}
               style={styles.input}
             />
           </View>
 
-          <Pressable
+           <Pressable
             style={styles.button}
-            onPress={() => navigation.replace('WaitingArea')}>
+            onPress={() => { 
+              if (awnser == 'Correta'){
+            
+                navigation.navigate({
+                 name: 'GameArea',
+                 params: { success: true },
+                 merge: true,
+               });
+            
+              } else {
+
+                setBotao ('Tenta outra vez')
+
+              }
+            }}>
             <Text style={styles.buttonTextStyle}>
-              Login
+              {nomeBotao}
             </Text>
           </Pressable>
-
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-              setModalVisible(!modalVisible);
-            }}
-          >
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>
-                Bem vindo à demonstração de frontend do software para Peddy Paper da Mission To Escape
-              </Text>
-              <Pressable
-                style={styles.modalButton}
-                onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={styles.buttonTextStyle}>
-                  Fechar
-                </Text>
-              </Pressable>
-            </View>
-          </Modal>
 
         </ScrollView>
       </KeyboardAvoidingView>
@@ -100,6 +76,11 @@ const styles = StyleSheet.create({
   fakeSpacer:{
     marginTop: '10%',
   },
+  destinationImage:{
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
+  },
   loginDiv:{
     marginTop: '20%',
     marginBottom: '2%',
@@ -117,7 +98,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   bigTextStyle: {
-    fontFamily: 'Calistoga_400Regular',
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
@@ -140,7 +120,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    marginHorizontal: '30%',
+    marginHorizontal: '20%',
     padding: 10,
     elevation: 2,
     backgroundColor: 'gold',
@@ -170,5 +150,5 @@ const styles = StyleSheet.create({
   scrollView: {
     //backgroundColor: 'pink',
     //marginHorizontal: 20,
-  },
+  }
 });
