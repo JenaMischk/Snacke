@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  Text, View, StyleSheet, Image, Modal, Alert, Pressable,
+import {  Text, View, StyleSheet, Image, Modal, Alert, Pressable, StatusBar,
           TextInput, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { Card } from 'react-native-paper';
@@ -16,6 +16,7 @@ export default function Home({ navigation }) {
 
 
     <SafeAreaView style={stylesPLS.container}>
+      <StatusBar barStyle="light-content" backgroundColor="black" />
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
         <ScrollView style={stylesPLS.scrollView}>
 

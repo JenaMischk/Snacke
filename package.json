@@ -21,16 +21,17 @@
     "@expo/vector-icons": "^12.0.0",
     "react-native-paper": "4.9.2",
     "react-native-screens": "~3.10.1",
+    "react-native-reanimated": "~2.3.1",
+    "@react-navigation/drawer": "*",
     "@react-navigation/native": "*",
     "@expo-google-fonts/calistoga": "*",
+    "react-native-gesture-handler": "~2.1.0",
+    "@expo-google-fonts/montserrat": "*",
     "@expo-google-fonts/dotgothic16": "*",
     "@react-navigation/native-stack": "*",
     "react-native-safe-area-context": "3.3.2",
     "react-native-countdown-component": "*",
-    "@react-navigation/drawer": "*",
-    "react-native-gesture-handler": "~2.1.0",
-    "react-native-reanimated": "~2.3.1",
-    "@expo-google-fonts/montserrat": "*"
+    "react-native-vector-icons": "9.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
